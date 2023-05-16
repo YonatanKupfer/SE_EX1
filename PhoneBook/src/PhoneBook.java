@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -41,6 +42,45 @@ public class PhoneBook{
         System.out.println("11. Exit");
 
     }
+    //add a contact
+    public void addContact(Contact contact) {
+        this.contactList.add(contact);
+    }
+    //delete a contact
+    public void deleteContact(String name) {
+        Iterator<Contact> iter = this.contactList.iterator();
+        while (iter.hasNext()) {
+            Contact contact = iter.next();
+            if (contact.getName().equals(name)) {
+                iter.remove();
+                return;
+            }
+        }
+    }
+
+    //display all contacts
+    public void displayContacts() {
+        Iterator<Contact> iter = this.contactList.iterator();
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+        System.out.println();
+    }
+
+    //search for a contact
+
+    //sort contacts by name
+
+    //sort contacts by phone number
+
+    //remove duplicates
+
+    //reverse the contact list
+
+    //save to file
+
+    //load from file
+
 
     public static void menuLoop(){
         Scanner reader = new Scanner(System.in);
@@ -50,7 +90,12 @@ public class PhoneBook{
             int choice = reader.nextInt();
             switch(choice){
                 case 1:
-                    addContact();
+                    System.out.println("Enter name");
+                    String name = reader.nextLine();
+                    System.out.println("Enter number");
+                    String number = reader.nextLine();
+                    Contact contact = new Contact(name, number);
+                    addContact(contact));
                     break;
                 case 2:
                     deleteContact();
