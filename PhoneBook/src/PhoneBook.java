@@ -7,6 +7,23 @@ import java.io.IOException;
 
 
 public class PhoneBook{
+
+    private ArrayList<Contact> contactList;
+
+    public PhoneBook(){
+        this.contactList = new ArrayList<Contact>();
+    }
+
+    public void setContactList(ArrayList<Contact> contactList){
+        this.contactList = contactList;
+    }
+
+    public ArrayList<Contact> getContactList(){
+        return this.contactList;
+    }
+
+    
+
     public static void menu(){
 
         System.out.println("Welcome to the menu");
