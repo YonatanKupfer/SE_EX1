@@ -73,26 +73,119 @@ public class PhoneBook{
     }
 
     //search for a contact
-
+    public void searchContact() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter name");
+        String name = reader.nextLine();
+        reader.close();
+        boolean found = false;
+        Iterator<Contact> iter = this.contactList.iterator();
+        while (iter.hasNext()) {
+            Contact contact = iter.next();
+            if (contact.getName().equals(name)) {
+                System.out.println(contact);
+                found = true;
+            }
+        }
+        if (!found){
+            System.out.println("Contact not found");
+        }
+    }
     //sort contacts by name
+    public void sortByName() {
+        this.contactList.sort((a, b) -> a.getName().compareTo(b.getName()));
+    }
 
     //sort contacts by phone number
+    public void sortByNumber() {
+        this.contactList.sort((a, b) -> a.getNumber().compareTo(b.getNumber()));
+    }
 
     //remove duplicates
+    public void removeDuplicates() {
+        ArrayList<Contact> newList = new ArrayList<Contact>();
+        Iterator<Contact> iter = this.contactList.iterator();
+        while (iter.hasNext()) {
+            Contact contact = iter.next();
+            if (!newList.contains(contact)) {
+                newList.add(contact);
+            }
+        }
+        this.contactList = newList;
+    }
 
     //reverse the contact list
-
+    public void reverseList() {
+        ArrayList<Contact> newList = new ArrayList<Contact>();
+        Iterator<Contact> iter = this.contactList.iterator();
+        while (iter.hasNext()) {
+            Contact contact = iter.next();
+            newList.add(0, contact);
+        }
+        this.contactList = newList;
+    }
     //save to file
+    public void saveToFile() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter file name");
+        String fileName = reader.nextLine();
+        reader.close();
+        try{
+            File file = new File(fileName + ".txt");
+            file.createNewFile();
+            try{
+                FileWriter writer = new FileWriter(fileName + ".txt");
+                Iterator<Contact> iter = this.contactList.iterator();
+                while (iter.hasNext()) {
+                    Contact contact = iter.next();
+                    writer.write(contact.getName() + "-" + contact.getNumber() + "\n");
+                }
+                writer.close();
+                System.out.println("Successfully wrote to the file");
+            } catch(IOException e){
+                System.out.println("An error occurred");
+                e.printStackTrace();
+            }
 
+        } catch(IOException e){
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+
+    }
+
+
+    
     //load from file
+    public void loadFromFile(){
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter file name");
+        String fileName = reader.nextLine();
+        reader.close();
+        try{
+            File file = new File(fileName + ".txt");
+            Scanner fileReader = new Scanner(file);
+            while(fileReader.hasNextLine()){
+                String data = fileReader.nextLine();
+                String[] contactData = data.split("-");
+                Contact contact = new Contact(contactData[0], contactData[1]);
+                this.addContact(contact);
+            }
+            fileReader.close();
+        } catch(FileNotFoundException e){
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
 
+    }
 
     public void menuLoop(){
-        Scanner reader = new Scanner(System.in);
-
-        while(true){
+        boolean loop = true;
+        while(loop){
             menu();
+            Scanner reader = new Scanner(System.in);
             int choice = reader.nextInt();
+            reader.close();
             switch(choice){
                 case 1:
                     System.out.println("Enter name");
@@ -130,7 +223,8 @@ public class PhoneBook{
                     loadFromFile();
                     break;
                 case 11:
-                    System.exit(0);
+                    System.out.println("Goodbye! exiting");
+                    loop = false;
                     break;
                 default:
                     System.out.println("Invalid choice");
