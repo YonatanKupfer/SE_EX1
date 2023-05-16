@@ -46,8 +46,13 @@ public class PhoneBook{
     public void addContact(Contact contact) {
         this.contactList.add(contact);
     }
+
     //delete a contact
-    public void deleteContact(String name) {
+    public void deleteContact() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter name");
+        String name = reader.nextLine();
+        reader.close();
         Iterator<Contact> iter = this.contactList.iterator();
         while (iter.hasNext()) {
             Contact contact = iter.next();
@@ -82,7 +87,7 @@ public class PhoneBook{
     //load from file
 
 
-    public static void menuLoop(){
+    public void menuLoop(){
         Scanner reader = new Scanner(System.in);
 
         while(true){
@@ -95,10 +100,10 @@ public class PhoneBook{
                     System.out.println("Enter number");
                     String number = reader.nextLine();
                     Contact contact = new Contact(name, number);
-                    addContact(contact));
+                    this.addContact(contact);
                     break;
                 case 2:
-                    deleteContact();
+                    this.deleteContact();
                     break;
                 case 3:
                     displayContacts();
