@@ -181,11 +181,11 @@ public class PhoneBook{
 
     public void menuLoop(){
         boolean loop = true;
+        
+        Scanner reader = new Scanner(System.in);
         while(loop){
-            menu();
-            Scanner reader = new Scanner(System.in);
+        	menu();
             int choice = reader.nextInt();
-            reader.close();
             switch(choice){
                 case 1:
                     System.out.println("Enter name");
@@ -231,5 +231,6 @@ public class PhoneBook{
                     break;
             }
         }
+        reader.close();
     }
 }
