@@ -133,11 +133,11 @@ public class PhoneBook{
         this.contactList = newList;
     }
     //save to file
-    public void saveToFile() {
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter file name");
-        String fileName = reader.nextLine();
-        reader.close();
+    public void saveToFile(String fileName) {
+        //Scanner reader = new Scanner(System.in);
+        //System.out.println("Enter file name");
+        //String fileName = reader.nextLine();
+        //reader.close();
         try{
             File file = new File(fileName + ".txt");
             file.createNewFile();
@@ -229,11 +229,15 @@ public class PhoneBook{
                     reverseList();
                     break;
                 case 9:
-                    saveToFile();
-                    break;
-                case 10:
+                    reader.nextLine();
                     System.out.println("Enter file name");
                     String fileName = reader.nextLine();
+                    saveToFile(fileName);
+                    break;
+                case 10:
+                    reader.nextLine();
+                    System.out.println("Enter file name");
+                    fileName = reader.nextLine();
                     loadFromFile(fileName);
                     break;
                 case 11:
