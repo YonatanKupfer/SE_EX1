@@ -107,7 +107,15 @@ public class PhoneBook{
         Iterator<Contact> iter = this.contactList.iterator();
         while (iter.hasNext()) {
             Contact contact = iter.next();
-            if (!newList.contains(contact)) {
+            Iterator<Contact> iter2 = newList.iterator();
+            boolean found = false;
+            while (iter2.hasNext()) {
+                Contact contact2 = iter2.next();
+                if (contact.getName().equals(contact2.getName()) && contact.getNumber().equals(contact2.getNumber())) {
+                    found = true;
+                }
+            }
+            if (!found) {
                 newList.add(contact);
             }
         }

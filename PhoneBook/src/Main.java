@@ -9,7 +9,7 @@ public class Main {
         myPhoneBook.addContact(new Contact("Joe", "1122334"));
         myPhoneBook.addContact(new Contact("Dvir", "7766554"));
         myPhoneBook.addContact(new Contact("Yonatan", "1231231"));
-
+        myPhoneBook.addContact(new Contact("Yonatan", "1231231"));
         myPhoneBook.menuLoop();
         
     }
