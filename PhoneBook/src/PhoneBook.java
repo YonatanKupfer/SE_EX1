@@ -48,11 +48,11 @@ public class PhoneBook{
     }
 
     //delete a contact
-    public void deleteContact() {
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter name");
-        String name = reader.nextLine();
-        reader.close();
+    public void deleteContact(String name) {
+        //Scanner reader = new Scanner(System.in);
+        //System.out.println("Enter name");
+        //String name = reader.nextLine();
+        //reader.close();
         Iterator<Contact> iter = this.contactList.iterator();
         while (iter.hasNext()) {
             Contact contact = iter.next();
@@ -157,11 +157,11 @@ public class PhoneBook{
 
     
     //load from file
-    public void loadFromFile(){
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter file name");
-        String fileName = reader.nextLine();
-        reader.close();
+    public void loadFromFile(String fileName){
+        //Scanner reader = new Scanner(System.in);
+        //System.out.println("Enter file name");
+        //String fileName = reader.nextLine();
+        //reader.close();
         try{
             File file = new File(fileName + ".txt");
             Scanner fileReader = new Scanner(file);
@@ -188,6 +188,7 @@ public class PhoneBook{
             int choice = reader.nextInt();
             switch(choice){
                 case 1:
+                    reader.nextLine();
                     System.out.println("Enter name");
                     String name = reader.nextLine();
                     System.out.println("Enter number");
@@ -196,7 +197,10 @@ public class PhoneBook{
                     this.addContact(contact);
                     break;
                 case 2:
-                    this.deleteContact();
+                    reader.nextLine();
+                    System.out.println("Enter name");
+                    name = reader.nextLine();
+                    this.deleteContact(name);
                     break;
                 case 3:
                     displayContacts();
@@ -220,7 +224,9 @@ public class PhoneBook{
                     saveToFile();
                     break;
                 case 10:
-                    loadFromFile();
+                    System.out.println("Enter file name");
+                    String fileName = reader.nextLine();
+                    loadFromFile(fileName);
                     break;
                 case 11:
                     System.out.println("Goodbye! exiting");
@@ -230,6 +236,7 @@ public class PhoneBook{
                     System.out.println("Invalid choice");
                     break;
             }
+
         }
         reader.close();
     }
